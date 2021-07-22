@@ -17,4 +17,5 @@
         android:id="@+id/tab_favoris"
         android:name="com.android.projet_android.ui.home_page.Favoris"
         android:label="Favoris" />
+
 </navigation>

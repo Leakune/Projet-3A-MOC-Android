@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.projet_android.R
 
-class Album: Fragment() {
+class Titre : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.album, container, false)
+        return inflater.inflate(R.layout.titre, container, false)
     }
     override fun onViewCreated(view: View,
                                savedInstanceState: Bundle?) {
