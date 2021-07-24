@@ -7,6 +7,6 @@ interface ApiService {
 
     //Routes vers l'artiste
     /*@GET("artist.php?i=112024")
-    fun getCourse(): Call<MutableList<MyDataItem>>*/
+    fun getAlbumArtiste(): Call<List<DataAlbumX>>*/
 
 }

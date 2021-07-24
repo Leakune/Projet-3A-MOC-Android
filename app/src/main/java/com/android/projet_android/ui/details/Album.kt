@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.projet_android.R
+import com.android.projet_android.ui.home_page.HomePage
 
 class Album: Fragment() {
 
@@ -13,10 +14,10 @@ class Album: Fragment() {
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.album, container, false)
     }
-    override fun onViewCreated(view: View,
-                               savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Assignez les valeurs à vos textes, images...
         super.onViewCreated(view, savedInstanceState)
+
     }
 
 }
