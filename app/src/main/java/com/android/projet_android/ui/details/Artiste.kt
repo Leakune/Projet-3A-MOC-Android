@@ -10,8 +10,6 @@ import com.android.projet_android.ui.Artiste.ListAlbum
 import com.android.projet_android.ui.Artiste.ListDescription
 import com.android.projet_android.ui.Artiste.ListTitleAppreciate
 import com.android.projet_android.ui.Artiste.Picture
-import com.android.projet_android.ui.home_page.Favoris
-import com.android.projet_android.ui.home_page.Rechercher
 
 class Artiste: Fragment() {
 

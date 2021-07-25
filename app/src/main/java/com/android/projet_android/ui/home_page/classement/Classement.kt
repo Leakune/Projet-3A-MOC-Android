@@ -28,7 +28,7 @@ class Classement: Fragment() {
         viewPager = view.findViewById(R.id.viewPager)
         tabLayout.addTab(tabLayout.newTab().setText("Titres"))
         tabLayout.addTab(tabLayout.newTab().setText("Albums"))
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL       //??
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = SectionPageAdapter(mContext, childFragmentManager,
             tabLayout.tabCount)
         viewPager.adapter = adapter

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projet_android">
-        <!--<activity android:name=".ui.details.Artiste">
+        <!--<activity android:name=".ui.Test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

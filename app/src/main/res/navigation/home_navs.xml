@@ -15,7 +15,7 @@
         android:label="Rechercher" />
     <fragment
         android:id="@+id/tab_favoris"
-        android:name="com.android.projet_android.ui.home_page.Favoris"
+        android:name="com.android.projet_android.ui.home_page.favoris.Favoris"
         android:label="Favoris" />
 
 </navigation>
