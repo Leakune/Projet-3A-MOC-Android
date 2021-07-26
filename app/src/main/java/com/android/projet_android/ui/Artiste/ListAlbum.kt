@@ -9,21 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.projet_android.R
-import com.android.projet_android.ui.API.ApiService
-import com.android.projet_android.ui.API.DataAlbum
+import com.g123k.myapplication.network.AlbumDataNameYears
+import com.g123k.myapplication.network.NetworkAlbum
 import kotlinx.android.synthetic.main.list_album.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ListAlbum :Fragment() {
 
     // Equivalent du setContentView : qu'afficher à l'écran ?
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Similaire à setContentView(R.layout.list_fragment)
         return inflater.inflate(R.layout.list_album, container, false)
     }
@@ -31,29 +28,34 @@ class ListAlbum :Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.list_album)
+        GlobalScope.launch(Dispatchers.Default){
 
-        val test = DataAlbum("Test", 2021)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.list_album)
+            val dataAlbumDataResume = NetworkAlbum.api.getAlbumNameYearsByArtisteDataAsync("The Weeknd").await()
 
-        recyclerView.apply {
-            /*view.list_album.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )*/
-            view.list_album.layoutManager = LinearLayoutManager(requireContext())
-            view.list_album.adapter = AlbumAdapter(test)
+            withContext(Dispatchers.Main){
+                recyclerView.apply {
+                    /*view.list_album.addItemDecoration(
+                        DividerItemDecoration(
+                            requireContext(),
+                            DividerItemDecoration.VERTICAL
+                        )
+                    )*/
+                    view.list_album.layoutManager = LinearLayoutManager(requireContext())
+                    adapter = AlbumAdapter(dataAlbumDataResume)
+
+                }
+            }
+
 
         }
-
     }
 
-    class AlbumAdapter(private val album: DataAlbum) : RecyclerView.Adapter<AlbumViewHolder>() {
+    class AlbumAdapter(private val album: AlbumDataNameYears) : RecyclerView.Adapter<AlbumViewHolder>() {
 
         override fun getItemCount(): Int {
             //return album.size
-            return 5
+            return album.content.size
         }
 
         // Comment créer une cellule
@@ -79,10 +81,10 @@ class ListAlbum :Fragment() {
         private val titleAlbum: TextView = itemView.findViewById(R.id.titleAlbum)
         private val yearAlbum: TextView = itemView.findViewById(R.id.yearAlbum)
 
-        fun bindView(position: Int, album: DataAlbum) {
+        fun bindView(position: Int, album: AlbumDataNameYears) {
 
-            titleAlbum.text = "Test"
-            yearAlbum.text = "2021"
+            titleAlbum.text = album.content[position].strAlbum
+            yearAlbum.text = album.content[position].intYearReleased
 
         }
     }

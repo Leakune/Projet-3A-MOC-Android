@@ -10,8 +10,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.projet_android.R
-import com.android.projet_android.ui.API.DataTitleAppreciate
+import com.g123k.myapplication.network.ArtistTopTrackData
+import com.g123k.myapplication.network.NetworkArtistToptrack
+import kotlinx.android.synthetic.main.list_album.view.*
 import kotlinx.android.synthetic.main.list_title_appreciate.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ListTitleAppreciate : Fragment() {
 
@@ -28,27 +34,28 @@ class ListTitleAppreciate : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.list_title_appreciate)
+        GlobalScope.launch(Dispatchers.Default){
 
-        recyclerView.apply {
-            view.list_title_appreciate.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-            view.list_title_appreciate.layoutManager = LinearLayoutManager(requireContext())
-            view.list_title_appreciate.adapter = TitleAdapter("test")
+            val recyclerView = view.findViewById<RecyclerView>(R.id.list_title_appreciate)
+            val title = NetworkArtistToptrack.api.getArtistsTopByNameDataAsync("The Weeknd").await()
+
+            withContext(Dispatchers.Main){
+                recyclerView.apply {
+                    view.list_title_appreciate.layoutManager = LinearLayoutManager(requireContext())
+                    adapter = TitleAdapter(title)
+
+                }
+            }
 
         }
 
     }
 
-    class TitleAdapter(private val title: String) : RecyclerView.Adapter<TitleViewHolder>() {
+    class TitleAdapter(private val title: ArtistTopTrackData) : RecyclerView.Adapter<TitleViewHolder>() {
 
         override fun getItemCount(): Int {
             //return album.size
-            return 5
+            return title.content.size
         }
 
         // Comment créer une cellule
@@ -73,10 +80,10 @@ class ListTitleAppreciate : Fragment() {
         private val idTitle: TextView = itemView.findViewById(R.id.numberTitle)
         private val title: TextView = itemView.findViewById(R.id.nameTitle)
 
-        fun bindView(position: Int,album: String) {
+        fun bindView(position: Int,album: ArtistTopTrackData) {
 
             idTitle.text = (position + 1).toString()
-            title.text = album
+            title.text = album.content[position].strTrack
 
         }
     }
