@@ -9,7 +9,7 @@ object ApiClient {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.theaudiodb.com/api/v1/json/1/")
+        .baseUrl("https://www.theaudiodb.com/api/v1/json/523532/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

@@ -2,6 +2,33 @@ package com.android.projet_android.ui.API
 
 
 import com.google.gson.annotations.SerializedName
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kotlinx.coroutines.Deferred
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import java.io.Serializable
+
+interface APIAlbum {
+    @GET("searchalbum.php")
+    fun getAlbumByArtisteName(@Query("s")value:String): Deferred<AlbumData>
+}
+
+object NetworkAlbum {
+    val api = Retrofit.Builder()
+        .baseUrl("https://theaudiodb.com/api/v1/json/523532/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+        .create(APIAlbum::class.java)
+}
+
+
+data class AlbumData(
+    @SerializedName("album")
+    val content: ArrayList<Album>,
+): Serializable
 
 data class Album(
     @SerializedName("idAlbum")

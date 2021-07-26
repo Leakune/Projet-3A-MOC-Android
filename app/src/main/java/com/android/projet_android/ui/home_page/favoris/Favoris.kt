@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android.projet_android.R
 import com.android.projet_android.model.AlbumFavoris
-import com.android.projet_android.model.Artiste
-import com.android.projet_android.ui.Artiste.ListAlbum
+import com.android.projet_android.ui.details.Artiste
 import kotlinx.android.synthetic.main.favoris.view.*
 
 class Favoris: Fragment() {
@@ -22,7 +19,7 @@ class Favoris: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Artistes
-        val recyclerViewArtistes = view.findViewById<RecyclerView>(R.id.list_artistes)
+       /* val recyclerViewArtistes = view.findViewById<RecyclerView>(R.id.list_artistes)
         val artistes: List<Artiste>
         artistes = listOf(
             generateFakeArtiste(),
@@ -32,10 +29,10 @@ class Favoris: Fragment() {
         recyclerViewArtistes.apply {
             view.list_artistes.layoutManager = LinearLayoutManager(requireContext())
             view.list_artistes.adapter = ArtisteAdapter(artistes)
-        }
+        }*/
 
         //Albums
-        val recyclerViewAlbums = view.findViewById<RecyclerView>(R.id.list_albums)
+        /*val recyclerViewAlbums = view.findViewById<RecyclerView>(R.id.list_albums)
         val albums: List<AlbumFavoris>
         albums = listOf(
             generateFakeAlbums(),
@@ -45,9 +42,9 @@ class Favoris: Fragment() {
         recyclerViewAlbums.apply {
             view.list_albums.layoutManager = LinearLayoutManager(requireContext())
             view.list_albums.adapter = AlbumAdapter(albums)
-        }
+        }*/
     }
-    fun generateFakeArtiste() = Artiste(
+    /*fun generateFakeArtiste() = Artiste(
         idArtist = 112024,
         strArtist = "The Weeknd",
         strArtistStripped = null,
@@ -105,5 +102,5 @@ class Favoris: Fragment() {
         strAlbum = "Thursday",
         strArtist = "The Weeknd",
         strAlbumThumb = "https://www.theaudiodb.com/images/media/album/thumb/thursday-4ee69293cd094.jpg"
-    )
+    )*/
 }
