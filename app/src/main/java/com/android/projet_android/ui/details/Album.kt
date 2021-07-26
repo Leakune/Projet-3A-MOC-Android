@@ -10,12 +10,10 @@ import com.android.projet_android.ui.home_page.HomePage
 
 class Album: Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.album, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Assignez les valeurs à vos textes, images...
         super.onViewCreated(view, savedInstanceState)
 
     }
