@@ -19,7 +19,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ListTitleAppreciate : Fragment() {
+class ListTitleAppreciate(val artistName: String): Fragment() {
 
     // Equivalent du setContentView : qu'afficher à l'écran ?
     override fun onCreateView(
@@ -37,10 +37,11 @@ class ListTitleAppreciate : Fragment() {
         GlobalScope.launch(Dispatchers.Default){
 
             val recyclerView = view.findViewById<RecyclerView>(R.id.list_title_appreciate)
-            val title = NetworkArtistToptrack.api.getArtistsTopByNameDataAsync("The Weeknd").await()
+            val title = NetworkArtistToptrack.api.getArtistsTopByNameDataAsync(artistName).await()
 
             withContext(Dispatchers.Main){
                 recyclerView.apply {
+                    view.list_title_appreciate.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
                     view.list_title_appreciate.layoutManager = LinearLayoutManager(requireContext())
                     adapter = TitleAdapter(title)
 

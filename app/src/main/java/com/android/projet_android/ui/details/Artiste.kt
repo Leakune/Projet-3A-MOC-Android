@@ -1,6 +1,7 @@
 package com.android.projet_android.ui.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +18,17 @@ class Artiste: Fragment() {
         return inflater.inflate(R.layout.artiste, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val artistName = arguments?.getString("nameArtist")
 
         parentFragmentManager
             .beginTransaction()
-            .replace(R.id.container1, Picture())
-            .replace(R.id.container2, ListDescription())
-            .replace(R.id.container3, ListAlbum())
-            .replace(R.id.container4, ListTitleAppreciate())
+            .replace(R.id.container1, Picture(artistName!!))
+            .replace(R.id.container2, ListDescription(artistName!!))
+            .replace(R.id.container3, ListAlbum(artistName!!))
+            .replace(R.id.container4, ListTitleAppreciate(artistName!!))
             .commitAllowingStateLoss()
     }
 

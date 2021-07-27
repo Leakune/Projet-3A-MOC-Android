@@ -10,9 +10,6 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 import java.io.Serializable
 
-
-
-
 interface API {
     @GET("search.php")
     fun getArtisteByNameAPI(@Query("s")value:String): Deferred<ArtisteData>

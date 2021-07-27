@@ -19,7 +19,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Picture : Fragment() {
+class Picture(val artistName: String) : Fragment() {
 
     // Equivalent du setContentView : qu'afficher à l'écran ?
     override fun onCreateView(
@@ -37,7 +37,7 @@ class Picture : Fragment() {
         GlobalScope.launch(Dispatchers.Default) {
 
             val imageView = view.findViewById<ImageView>(R.id.imgArtiste)
-            val api = NetworkArtist.api.getArtistsDetailsByArtistNameDataAsync("The Weeknd").await()
+            val api = NetworkArtist.api.getArtistsDetailsByArtistNameDataAsync(artistName).await()
             val url = api.content[0].strArtistThumb
             val title = view.findViewById<TextView>(R.id.titleArtiste)
             val subTitle = view.findViewById<TextView>(R.id.subTitle)

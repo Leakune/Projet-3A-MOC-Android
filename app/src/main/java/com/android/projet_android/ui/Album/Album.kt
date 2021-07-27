@@ -1,6 +1,7 @@
-package com.android.projet_android.ui.details
+package com.android.projet_android.ui.Album
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,16 @@ class Album: Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val strAlbum = arguments?.getString("strAlbum")
+
+        Log.e("Tag123", strAlbum.toString())
+
+        /*parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.container1, Picture())
+            .commitAllowingStateLoss()*/
+
 
     }
 

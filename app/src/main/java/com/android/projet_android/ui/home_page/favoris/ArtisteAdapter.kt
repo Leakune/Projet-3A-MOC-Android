@@ -1,6 +1,7 @@
 package com.android.projet_android.ui.home_page.favoris
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,8 @@ class ArtisteAdapter(private val listArtiste: ArtisteData) : RecyclerView.Adapte
     }
 
     // Comment créer une cellule
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtisteCell {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.artiste_cell, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ArtisteCell{
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.artiste_cell, parent, false)
 
         return ArtisteCell(view)
     }
@@ -46,12 +46,10 @@ class ArtisteAdapter(private val listArtiste: ArtisteData) : RecyclerView.Adapte
                 withContext(Dispatchers.Main) {
                     val intent = Intent(holder.itemView.findFragment<Rechercher>().mContext, Artiste::class.java)
                     intent.putExtra("id", listArtiste.content.get(position).idArtist);
-                    holder.itemView.findFragment<Rechercher>().mContext.startActivity(intent)
+                    //holder.itemView.findFragment<Rechercher>().mContext.startActivity(intent)
+                    Log.e("TAG", "Test")
                 }
             }
-            /*var fr = getFragmentManager()?.beginTransaction()
-            fr?.replace(R.id.fragment, Fragment_Two())
-            fr?.commit()*/
 
         }
     }
@@ -61,21 +59,22 @@ class ArtisteAdapter(private val listArtiste: ArtisteData) : RecyclerView.Adapte
 class ArtisteCell(v: View) : RecyclerView.ViewHolder(v) {
     private val imageArtiste: ImageView = v.findViewById(R.id.image_artiste)
     private val titleArtiste: TextView = v.findViewById(R.id.title_artiste)
-    var idArtiste=""
+    var nameArtist=""
     init {
         titleArtiste.setOnClickListener {
             val intent = Intent(v.context, Test::class.java)
             GlobalScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.Main) {
-                    intent.putExtra("id", idArtiste);
+                    intent.putExtra("nameArtist", nameArtist);
                     v.context.startActivity(intent)
                 }
             }
         }
     }
+
     fun updateCell(artiste: ArtisteDataContent) {
         titleArtiste.text = artiste.strArtist
-        idArtiste = artiste.idArtist
+        nameArtist = artiste.strArtist!!
         if(artiste.strArtistThumb != null && artiste.strArtistThumb != ""){
             Picasso.get().load(artiste.strArtistThumb).into(imageArtiste)
         }

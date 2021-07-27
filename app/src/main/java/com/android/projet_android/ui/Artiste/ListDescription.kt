@@ -17,7 +17,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ListDescription: Fragment() {
+class ListDescription(val artistName: String): Fragment() {
 
     // Equivalent du setContentView : qu'afficher à l'écran ?
     override fun onCreateView(
@@ -35,7 +35,7 @@ class ListDescription: Fragment() {
         GlobalScope.launch(Dispatchers.Default) {
 
             val recyclerView = view.findViewById<RecyclerView>(R.id.list_description)
-            val desc = NetworkArtist.api.getArtistsDetailsByArtistNameDataAsync("The Weeknd").await()
+            val desc = NetworkArtist.api.getArtistsDetailsByArtistNameDataAsync(artistName).await()
 
             withContext(Dispatchers.Main){
                 recyclerView.apply {

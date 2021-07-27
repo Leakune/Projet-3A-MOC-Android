@@ -8,17 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// fonctionne
-// /*Return The top 10 Most Loved tracks for an Artist Name *Patreon ONLY*
-//theaudiodb.com/api/v1/json/523532/track-top10.php?s=coldplay/
-
-// data Album
 data class ArtistTopTrackData(
     @SerializedName("track")
     val content: List<ArtistTopTrackContent>,
 )
-// data pour l'écran classement onglet Titres
-// url :
+
 data class ArtistTopTrackContent(
     val idTrack: String,
     val idAlbum:String,
@@ -30,9 +24,9 @@ data class ArtistTopTrackContent(
 )
 
 interface APIArtistToptrack {
-    // get album par artiste
-    @GET("track-top10.php") //coldplay({artistid}
-    fun getArtistsTopByNameDataAsync(@Query("s")value:String): Deferred<ArtistTopTrackData> // albumId:String
+
+    @GET("track-top10.php")
+    fun getArtistsTopByNameDataAsync(@Query("s")value:String): Deferred<ArtistTopTrackData>
 
 
 }
