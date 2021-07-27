@@ -1,6 +1,7 @@
 package com.android.projet_android.ui.home_page.favoris
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,8 @@ class ArtisteAdapter(private val listArtiste: ArtisteData) : RecyclerView.Adapte
                 withContext(Dispatchers.Main) {
                     val intent = Intent(holder.itemView.findFragment<Rechercher>().mContext, Artiste::class.java)
                     intent.putExtra("id", listArtiste.content.get(position).idArtist);
-                    holder.itemView.findFragment<Rechercher>().mContext.startActivity(intent)
+                    //holder.itemView.findFragment<Rechercher>().mContext.startActivity(intent)
+                    Log.e("TAG", "Test")
                 }
             }
             /*var fr = getFragmentManager()?.beginTransaction()
@@ -58,7 +60,7 @@ class ArtisteAdapter(private val listArtiste: ArtisteData) : RecyclerView.Adapte
 }
 
 // Une cellule
-class ArtisteCell(v: View) : RecyclerView.ViewHolder(v) {
+class ArtisteCell(v: View, listArtiste: ArtisteData) : RecyclerView.ViewHolder(v) {
     private val imageArtiste: ImageView = v.findViewById(R.id.image_artiste)
     private val titleArtiste: TextView = v.findViewById(R.id.title_artiste)
     var idArtiste=""
@@ -67,12 +69,13 @@ class ArtisteCell(v: View) : RecyclerView.ViewHolder(v) {
             val intent = Intent(v.context, Test::class.java)
             GlobalScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.Main) {
-                    intent.putExtra("id", idArtiste);
+                    intent.putExtra("id", listArtiste.content[position].strArtist);
                     v.context.startActivity(intent)
                 }
             }
         }
     }
+
     fun updateCell(artiste: ArtisteDataContent) {
         titleArtiste.text = artiste.strArtist
         idArtiste = artiste.idArtist
