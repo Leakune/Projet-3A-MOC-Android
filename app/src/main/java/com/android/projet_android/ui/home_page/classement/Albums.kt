@@ -1,4 +1,4 @@
-package com.android.projet_android.ui.home_page
+package com.android.projet_android.ui.home_page.classement
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.projet_android.R
 
-class Favoris: Fragment() {
+class Albums: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.favoris, container, false)
+        return inflater.inflate(R.layout.albums, container, false)
     }
     override fun onViewCreated(view: View,
                                savedInstanceState: Bundle?) {
